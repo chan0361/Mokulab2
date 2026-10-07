@@ -579,14 +579,11 @@ int bitCount(int x) {
  */
 int bitReverse(int x)
 {
-  int m1 = 0x55 | (0x55 << 8);
-  int m2 = 0x33 | (0x33 << 8);
-  int m4 = 0x0f | (0x0f << 8);
   int m8 = 0xff | (0xff << 16);
+  int m4 = m8 ^ (m8 << 4);
+  int m2 = m4 ^ (m4 << 2);
+  int m1 = m2 ^ (m2 << 1);
   int m16 = 0xff | (0xff << 8);
-  m1 = m1 | (m1 << 16);
-  m2 = m2 | (m2 << 16);
-  m4 = m4 | (m4 << 16);
   x = ((x >> 1) & m1) | ((x & m1) << 1);
   x = ((x >> 2) & m2) | ((x & m2) << 2);
   x = ((x >> 4) & m4) | ((x & m4) << 4);
